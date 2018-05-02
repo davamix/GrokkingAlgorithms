@@ -30,6 +30,6 @@ add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
 
 add_executable(project-test Algorithms-test.cpp)
 
-target_link_libraries(project-test libproject gtest_main)
+target_link_libraries(project-test libproject gtest_main gmock_main)
 
 add_test(NAME Algorithms COMMAND project-test)

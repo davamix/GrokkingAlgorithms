@@ -7,14 +7,14 @@ int BinarySearch::Search(std::vector<int> list, int item){
     int low = 0; // low index
     int high = list.size() - 1; // high index
 
-    std::cout << "High: " << high << std::endl;
+    std::cout << "High: " << high;
 
     while(low <= high){
         int mid = (low + high) / 2; // mid index
         int guess = list[mid];
 
-        std::cout << "Mid: " << mid << std::endl;
-        std::cout << "Guess: " << guess << std::endl;
+        std::cout << " Mid: " << mid;
+        std::cout << " Guess: " << guess << std::endl;
 
         if(guess == item)
             return mid;
