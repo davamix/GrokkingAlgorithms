@@ -5,6 +5,7 @@
 
 #include "BinarySearch.h"
 #include "SelectionSort.h"
+#include "QuickSort.h"
 
 namespace{
     class Algorithms : public::testing::Test{
@@ -26,6 +27,15 @@ namespace{
         std::vector<int> result = ss.Sort(list);
 
         ASSERT_THAT(result, ::testing::ElementsAreArray({2, 3, 5, 6, 10}));
+    }
+
+    TEST(Algorithms, Quick_Sort_tests){
+        QuickSort qs;
+        std::vector<int> list = {10, 5, 2, 3};
+
+        std::vector<int> result = qs.Sort(list);
+
+        ASSERT_THAT(result, ::testing::ElementsAreArray({2, 3, 5, 10}));
     }
 }
     
