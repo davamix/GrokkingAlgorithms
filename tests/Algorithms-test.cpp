@@ -6,6 +6,7 @@
 #include "BinarySearch.h"
 #include "SelectionSort.h"
 #include "QuickSort.h"
+#include "BreadthFirstSearch.h"
 
 namespace{
     class Algorithms : public::testing::Test{
@@ -36,6 +37,26 @@ namespace{
         std::vector<int> result = qs.Sort(list);
 
         ASSERT_THAT(result, ::testing::ElementsAreArray({2, 3, 5, 10}));
+    }
+
+    TEST(Algorithms, Breadth_First_Search){
+        BreadthFirstSearch bfs;
+
+        std::unordered_map<std::string, std::queue<BfsPerson>> graph = {
+            {"you", std::queue<BfsPerson>({{.Name = "alice"}, {.Name="bob"}, {.Name = "claire"}})},
+            {"bob", std::queue<BfsPerson>({{.Name = "anuj"}, {.Name="peggy"}})},
+            {"claire", std::queue<BfsPerson>({{.Name = "thom", .IsSeller = true}, {.Name = "jonny"}})},
+            {"anuj", std::queue<BfsPerson>({{.Name = "peter", .IsSeller = true}})},
+            {"peggy", std::queue<BfsPerson>()},
+            {"thom", std::queue<BfsPerson>()},
+            {"jonny", std::queue<BfsPerson>()},
+            {"peter", std::queue<BfsPerson>({{.Name = "claire"}})}
+        };
+
+        std::string result = bfs.Search("you", graph);
+        
+        EXPECT_EQ("thom", result); // 2nd level contact
+        EXPECT_NE("peter", result);  // Is seller but is 3rd level contact
     }
 }
     
