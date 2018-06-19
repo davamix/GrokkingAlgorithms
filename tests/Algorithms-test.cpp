@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
+#include <set>
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
 
@@ -7,6 +9,7 @@
 #include "SelectionSort.h"
 #include "QuickSort.h"
 #include "BreadthFirstSearch.h"
+#include "Greedy.h"
 
 namespace{
     class Algorithms : public::testing::Test{
@@ -58,5 +61,26 @@ namespace{
         EXPECT_EQ("thom", result); // 2nd level contact
         EXPECT_NE("peter", result);  // Is seller but is 3rd level contact
     }
+
+    TEST(Algorithms, Greedy_Search){
+        Greedy g_search;
+
+        std::set<std::string> states_needed{"mt", "wa", "or", "id", "nv", "ut", "ca", "az"};
+
+        std::unordered_map<std::string, std::set<std::string>> stations = {
+            {"kone", std::set<std::string>({"id", "nv", "ut"})},
+            {"ktwo", std::set<std::string>({"wa", "id", "mt"})},
+            {"kthree", std::set<std::string>({"or", "nv", "ca"})},
+            {"kfour", std::set<std::string>({"nv", "ut"})},
+            {"kfive", std::set<std::string>({"ca", "az"})} 
+        };
+
+        std::set<std::string> result = g_search.Search(stations, states_needed);
+
+        //ASSERT_THAT(result, ::testing::ElementsAreArray({"ktwo", "kthree", "kone", "kfive"}));
+        
+        EXPECT_EQ(result.size(), 4); // ktwo, kthree, kfive, kfour
+
+   }
 }
     
